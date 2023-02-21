@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:37:14 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/30 17:30:32 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/02/18 07:59:31 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/wait.h>
 # include <sys/wait.h>
 # include <errno.h>
-# include "ft_printf/ft_printf.h"
+# include "./libft/includes/libft.h"
 
 # define IN		0
 # define OUT	1
@@ -49,11 +49,15 @@ typedef struct s_info
 {
 	int			ac;
 	char		**av;
+
 	int			fd[2];
 	pid_t		pids[1024];
 	int			prev_pipes;
+
 	const char	**env;
 	int			env_size;
+
+	int			status;
 }	t_info;
 
 typedef struct s_pipex
@@ -80,7 +84,7 @@ int			valid_command(const char *cmd, t_info info);
 //	parse.c
 void		parse_av(int ac, char **av, t_pipex *pipex, t_file file[2]);
 //	exec.c
-void		exec_cmd(t_plist *list, t_info info);
+void		exec_cmd(t_plist *list, t_info *info);
 void		exec(t_plist *lst, t_pipex *pipex, t_file (*file[2]), int index);
 //	file.c
 void		readfile(t_file *file);

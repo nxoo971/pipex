@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 06:40:16 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/30 17:28:32 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/02/18 08:02:45 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parse_av(int ac, char **av, t_pipex *pipex, t_file file[2])
 		split = ft_split(av[i], ' ');
 		if (!split)
 		{
-			ft_arraydel((void **)split);
+			ft_arraydel((char **)split);
 			return ;
 		}
 		add_elem(& pipex->head, & pipex->plist, split[0], (const char **)split);

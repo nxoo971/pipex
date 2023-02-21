@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:37:05 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/31 12:10:07 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/02/18 08:02:25 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	close_pipe(t_info *info)
 {
-	if (close(info->fd[0]) == -1)
-		ft_printf("Cannot close fd 0\n");
-	if (close(info->fd[1]) == -1)
-		ft_printf("Cannot close fd 1\n");
+	close(info->fd[0]);
+	close(info->fd[1]);
 }
 
 int	loop(t_pipex pipex, t_file file[2])
@@ -54,8 +52,8 @@ int	main(int ac, char **av, char **env)
 	static t_pipex	pipex = {0};
 	static t_info	info = {0, .prev_pipes = -1};
 	static t_file	file[2] = {0};
-	t_plist			*lst;
 	int				index_pid;
+	int status = 0;
 
 	if (!env || !*env || ac < 5)
 		return (0);
@@ -63,12 +61,14 @@ int	main(int ac, char **av, char **env)
 	if (!info.env)
 		return (0);
 	parse_av(ac, av, & pipex, file);
-	lst = pipex.head->first;
 	pipex.info = info;
+	pipex.info.status = 0;
 	index_pid = loop(pipex, file);
 	while (--index_pid >= 0)
-		waitpid(info.pids[index_pid], 0, 0);
-	ft_arraydel((void **)info.env);
+		waitpid(info.pids[index_pid], & status, 0);
+	if (WIFEXITED(status))
+			status = WEXITSTATUS(status);
+	ft_arraydel((char **)info.env);
 	free_pipex(pipex);
-	return (0);
+	exit (status);
 }

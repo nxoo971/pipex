@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:26:39 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/30 17:32:45 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/01/27 08:15:26 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_list(t_pipex pipex)
 	{
 		ft_printf("{cyan}Command{reset}:\t%s\n", lst->command);
 		i = -1;
-		while (++i < lst->option[i])
+		while (lst->option[++i])
 			ft_printf("{red}Option{reset}:\t\t%s\n", lst->option[i]);
 		ft_printf("{magenta}Act{reset}:\t\t%p\n", lst);
 		ft_printf("{yellow}Prev{reset}:\t\t%p\n\n", lst->prev);
@@ -57,8 +57,10 @@ void	print_tfile(t_file file[2])
 void	print_error_exit(const char *str)
 {
 	if (errno == 13)
+	{
 		printf("bash: %s: Permission denied\n", str);
-	else
-		printf("bash: %s: No such file or directory\n", str);
-	exit(EXIT_FAILURE);
+		exit(127);
+	}
+	printf("bash: %s: No such file or directory\n", str);
+	exit(1);
 }
