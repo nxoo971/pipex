@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:39:09 by jewancti          #+#    #+#             */
-/*   Updated: 2023/02/18 08:26:50 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/01 01:45:55 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ void	exec_cmd(t_plist *list, t_info *info)
 	lst = list;
 	path_id = valid_command(lst->command, *info);
 	if (path_id == -1)
-		ft_printf("%s: command not found\n", lst->command, info -> status = 127);
+	{
+		if (lst -> command)
+			ft_printf("bash: %s: command not found\n", lst->command, info -> status = 127);
+		else
+			ft_printf("bash: : command not found\n", info -> status = 127);
+	}
 	else
 	{
 		cmd = ft_strjoin(info -> env[path_id], lst->command);
@@ -32,15 +37,14 @@ void	exec_cmd(t_plist *list, t_info *info)
 		}
 	}
 	close_pipe(info);
-	ft_arraydel((char **)info -> env);
 }
 
-void	exec(t_plist *lst, t_pipex *pipex, t_file (*file[2]), int index)
+void	exec(t_plist *lst, t_pipex *pipex, t_file **file, int index)
 {
 	if (index == 0)
 	{
-		readfile(*file + IN);
 		dup2(pipex->info.fd[1], STDOUT_FILENO);
+		readfile(*file + IN, *pipex);
 		close_pipe(& pipex->info);
 		exec_cmd(lst, & pipex->info);
 		free_pipex(*pipex);
@@ -50,7 +54,7 @@ void	exec(t_plist *lst, t_pipex *pipex, t_file (*file[2]), int index)
 	{
 		dup2(pipex->info.prev_pipes, STDIN_FILENO);
 		close(pipex->info.prev_pipes);
-		writefile(*file + OUT);
+		writefile(*file + OUT, *pipex);
 		close_pipe(& pipex->info);
 		exec_cmd(lst, & pipex->info);
 		free_pipex(*pipex);

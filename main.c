@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:37:05 by jewancti          #+#    #+#             */
-/*   Updated: 2023/02/18 08:02:25 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:06:22 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	main(int ac, char **av, char **env)
 		waitpid(info.pids[index_pid], & status, 0);
 	if (WIFEXITED(status))
 			status = WEXITSTATUS(status);
-	ft_arraydel((char **)info.env);
 	free_pipex(pipex);
 	exit (status);
 }

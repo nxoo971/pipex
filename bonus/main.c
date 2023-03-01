@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:37:05 by jewancti          #+#    #+#             */
-/*   Updated: 2023/02/18 08:24:15 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:07:12 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,14 @@ int	main(int ac, char **av, char **env)
 	info.env = env_paths_to_string(env, & info.env_size);
 	if (!info.env)
 		return (0);
-	parse_av(ac, av, & pipex, file);
 	pipex.info = info;
 	pipex.info.status = 0;
-	print_list(pipex);
+	parse_av(ac, av, & pipex, file);
 	index_pid = loop(pipex, file);
 	while (--index_pid >= 0)
 		waitpid(info.pids[index_pid], & status, 0);
 	if (WIFEXITED(status))
 			status = WEXITSTATUS(status);
-	ft_arraydel((char **)info.env);
 	free_pipex(pipex);
 	exit(status);
 }

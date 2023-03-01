@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 07:54:56 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/13 08:10:46 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/01 02:05:55 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	free_pipex(t_pipex pipex)
 {
-	t_plist	*lst;
 	t_plist	*tmp;
-	t_head	*head;
+	t_plist	*lst;
 
-	lst = pipex.plist;
-	head = pipex.head;
+	lst = pipex.head->first;
+	if (pipex.info.limiter)
+		close(pipex.info.heredoc[0]);
+	ft_arraydel((char **)pipex.info.env);
 	while (lst)
 	{
 		tmp = lst->prev;
-		ft_memdel((void **)& lst->command);
-		ft_memdel((void **)& lst->option);
+		ft_arraydel((char **)lst->option);
 		ft_memdel((void **)& lst);
 		lst = tmp;
 	}
-	ft_memdel((void **)& head);
+	ft_memdel((void **)& pipex.head);
 }
