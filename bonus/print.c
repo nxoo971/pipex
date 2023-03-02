@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:26:39 by jewancti          #+#    #+#             */
-/*   Updated: 2023/02/28 23:37:24 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:41:38 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,4 @@ void	print_tfile(t_file file[2])
 	ft_printf("{blue}Filename{reset}:\t\t%s\n", file[OUT].filename);
 	ft_printf("{blue}Content{reset}:\t\t%s\n", file[OUT].content);
 	ft_printf("{blue}Fd{reset}:\t\t\t%d\n", file[OUT].fd);
-}
-
-void	print_error_exit(const char *str)
-{
-	if (errno == 13)
-	{
-		printf("bash: %s: Permission denied\n", str);
-		exit(127);
-	}
-	printf("bash: %s: No such file or directory\n", str);
-	exit(1);
 }

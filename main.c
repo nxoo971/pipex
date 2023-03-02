@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:37:05 by jewancti          #+#    #+#             */
-/*   Updated: 2023/03/02 08:16:56 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:32:15 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av, char **env)
 	int				status;
 
 	status = 0;
-	if (!env || !*env || ac < 5)
+	if (!env || !*env || ac != 5)
 		return (0);
 	info.env = env_paths_to_string(env, & info.env_size);
 	if (!info.env)

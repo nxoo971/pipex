@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:37:14 by jewancti          #+#    #+#             */
-/*   Updated: 2023/02/28 23:38:41 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:41:42 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void		free_pipex(t_pipex pipex);
 void		print_list(t_pipex pipex);
 void		print_head(t_pipex pipex);
 void		print_tfile(t_file file[2]);
-void		print_error_exit(const char *str);
 //	main.c
 void		close_pipe(t_info *info);
 
