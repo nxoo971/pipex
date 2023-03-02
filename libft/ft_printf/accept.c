@@ -6,53 +6,53 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 21:06:24 by nxoo              #+#    #+#             */
-/*   Updated: 2022/12/31 13:09:15 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:11:16 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-t_bool	accept_flag_char(struct s_spec_info *s, char c)
+bool	accept_flag_char(struct s_spec_info *s, char c)
 {
 	if (c == '#')
-		s->sharp = vrai;
+		s->sharp = true;
 	else if (c == '-')
-		s->is_left_aligned = vrai;
+		s->is_left_aligned = true;
 	else if (c == '+')
-		s->plus = vrai;
+		s->plus = true;
 	else if (c == ' ' && !s->plus)
-		s->space = vrai;
+		s->space = true;
 	else if (c == '0')
-		s->with_leading_zeroes = vrai;
+		s->with_leading_zeroes = true;
 	else
 		return (c == ' ');
-	return (vrai);
+	return (true);
 }
 
-t_bool	accept_width_char(struct s_spec_info *s, char c)
+bool	accept_width_char(struct s_spec_info *s, char c)
 {
 	if (ft_isdigit(c))
 	{
-		s->width_is_specified = vrai;
+		s->width_is_specified = true;
 		s->width = 10 * s->width + c - '0';
-		return (vrai);
+		return (true);
 	}
-	return (faux);
+	return (false);
 }
 
-t_bool	accept_precision_char(struct s_spec_info *s, char c)
+bool	accept_precision_char(struct s_spec_info *s, char c)
 {
 	if (ft_isdigit(c))
 	{
 		if (s->precision == -1)
 			s->precision = 0;
 		s->precision = 10 * s->precision + c - '0';
-		return (vrai);
+		return (true);
 	}
-	return (faux);
+	return (false);
 }
 
-t_bool	accept_type_char(struct s_spec_info *s, char c)
+bool	accept_type_char(struct s_spec_info *s, char c)
 {
 	if (c == 'h')
 		s->half_count++;
@@ -61,6 +61,6 @@ t_bool	accept_type_char(struct s_spec_info *s, char c)
 	else if (c == 'z')
 		s->is_size_t++;
 	else
-		return (faux);
-	return (vrai);
+		return (false);
+	return (true);
 }

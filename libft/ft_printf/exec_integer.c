@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:18:01 by nxoo              #+#    #+#             */
-/*   Updated: 2022/12/31 13:09:37 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:12:32 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	exec_integer(va_list *param, struct s_spec_info *s)
 		n = n * -1;
 	if (s->space && !s->plus && !s->is_negative)
 		written = ft_putchar_fd(' ', 2);
-	return (written + print_algo_flag(s, n, 10, faux));
+	return (written + print_algo_flag(s, n, 10, false));
 }

@@ -1,38 +1,43 @@
-SRCS = main.c list.c get_path.c parse.c exec.c file.c free.c print.c
-SRCS_B = $(addprefix bonus/, main.c list.c get_path.c parse.c exec.c file.c free.c print.c)
-OBJS = ${SRCS:.c=.o}
-OBJS_B = ${SRCS_B:.c=.o}
-DEPS = ${SRCS:.c=.d}
-DEPS_B = ${SRCS_B:.c=.d}
-NAME = pipex
-NAME_B = pipex_bonus
-INC = -I ./
-FLAGS = -g3 -Wall -Werror -Wextra
+SRCS		=	main.c list.c get_path.c parse.c exec.c file.c free.c print.c
+OBJS		=	$(SRCS:.c=.o)
+DEPS		=	$(SRCS:.c=.d)
 
-all : ${NAME}
+SRCS_BONUS	=	$(addprefix bonus/, main.c list.c get_path.c parse.c exec.c file.c free.c print.c)
+OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
+DEPS_BONUS	=	$(SRCS_BONUS:.c=.d)
 
-${NAME} : ${OBJS}
-	make -C ./libft/
-	gcc ${FLAGS} ${INC} $(OBJS) -o $(NAME) libft/libft.a
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -g3 -MMD -MP
+INCLUDE		=	-I include
+PIPEX		=	pipex
+LIBS		=	libft/libft.a
+RM			=	rm -rf
 
-%.o:%.c
-	gcc ${FLAGS} -c $< -o $@ -MMD
+${PIPEX}:	${OBJS}
+			make -C libft
+			${CC} ${CFLAGS} ${OBJS} ${LIBS} -o ${PIPEX}
 
-bonus: ${NAME_B}
+all:	${PIPEX}
 
-${NAME_B}: ${OBJS_B} libft/libft.a
-	gcc ${FLAGS} ${INC} ${OBJS_B} -o ${NAME_B} libft/libft.a
+.c.o:
+		${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
--include ${DEPS} ${DEPS_B}
+bonus:	${OBJS_BONUS}
+		make -C libft
+		${CC} ${CFLAGS} ${OBJS_BONUS} ${LIBS}  -o ${PIPEX}
 
-clean :
-	make -C ./libft/ clean
-	rm -rf ${OBJS} ${DEPS} ${OBJS_B} ${DEPS_B}
+clean:
+		${RM} ${OBJS}
+		${RM} ${OBJS_BONUS}
+		${RM} ${DEPS}
+		${RM} ${DEPS_BONUS}
 
-fclean : clean
-	make -C ./libft/ fclean
-	rm -rf ${NAME} ${NAME_B}
+fclean:	clean
+		${RM} ${PIPEX}
+		make fclean -C libft/
 
-re : fclean all
+re:		fclean all
 
-.PHONY : all bonus clean fclean re
+-include ${DEPS}
+
+.PHONY: all clean fclean re

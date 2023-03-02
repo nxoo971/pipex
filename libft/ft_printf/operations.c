@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:21:00 by nxoo              #+#    #+#             */
-/*   Updated: 2022/12/31 13:09:50 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:13:19 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define SIZE	2 /* upper and lower base */
 
-int	print_n_base(uintptr_t n, int base, t_bool lower)
+int	print_n_base(uintptr_t n, int base, bool lower)
 {
 	static int					len;
 	static const char *const	bases[SIZE] = {BASE, LOWERBASE};

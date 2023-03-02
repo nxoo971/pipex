@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 06:40:16 by jewancti          #+#    #+#             */
-/*   Updated: 2023/03/01 02:02:46 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:19:23 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_heredoc(char **av, t_pipex *pipex)
 	pipex -> info.limiter = av[2];
 	if (pipe(pipex -> info.heredoc) == -1)
 		exit(EXIT_FAILURE);
-	pid = fork();	
+	pid = fork();
 	if (pid == -1)
 		return (ft_printf("Can't fork pid"));
 	if (pid == 0)

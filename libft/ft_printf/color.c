@@ -6,28 +6,28 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:35:55 by nxoo              #+#    #+#             */
-/*   Updated: 2022/12/31 13:09:33 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:13:54 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static t_bool	color_exist(const char *s1, const char *s2, size_t n)
+static bool	color_exist(const char *s1, const char *s2, size_t n)
 {
 	while ((*s1 || *s2) && n-- > 0)
 	{
 		if (*s1 != ft_toupper(*s2))
-			return (faux);
+			return (false);
 		s1++;
 		s2++;
 	}
-	return (vrai);
+	return (true);
 }
 
 #define PRE_COLOR	"\e["
 #define END_COLOR	"m"
 
-static t_bool	print_color(const char *start, const char *end, \
+static bool	print_color(const char *start, const char *end, \
 								const char *const scolor[100])
 {
 	int	is_bg;
@@ -47,15 +47,15 @@ static t_bool	print_color(const char *start, const char *end, \
 				if (is_bg)
 					i += 10;
 				ft_printf("%s%d%s", PRE_COLOR, i, END_COLOR);
-				return (vrai);
+				return (true);
 			}
 		}
 		i++;
 	}
-	return (faux);
+	return (false);
 }
 
-t_bool	explain_color(const char *start, const char *end)
+bool	explain_color(const char *start, const char *end)
 {
 	static const char *const	scolor[100] = {
 	[0] = "RESET",

@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:39:09 by jewancti          #+#    #+#             */
-/*   Updated: 2023/03/01 02:06:48 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:28:05 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	exec_cmd(t_plist *list, t_info *info)
 	if (path_id == -1)
 	{
 		if (lst -> command)
-			ft_printf("bash: %s: command not found\n", lst->command, info -> status = 127);
+			ft_printf("bash: %s: command not found\n", \
+						lst->command, info -> status = 127);
 		else
 			ft_printf("bash: : command not found\n", info -> status = 127);
 	}
@@ -39,6 +40,15 @@ void	exec_cmd(t_plist *list, t_info *info)
 	close_pipe(info);
 }
 
+static
+void	norm(t_plist *lst, t_pipex *pipex)
+{
+	close_pipe(& pipex->info);
+	exec_cmd(lst, & pipex->info);
+	free_pipex(*pipex);
+	exit(pipex -> info.status);
+}
+
 void	exec(t_plist *lst, t_pipex *pipex, t_file **file, int index)
 {
 	if (index == 0)
@@ -51,26 +61,18 @@ void	exec(t_plist *lst, t_pipex *pipex, t_file **file, int index)
 		}
 		else
 			readfile(*file + IN, *pipex);
-		close_pipe(& pipex->info); 
-		exec_cmd(lst, & pipex->info);
-		free_pipex(*pipex);
-		exit(pipex -> info.status);
 	}
-	if (index == pipex->head->length - 1)
+	else if (index == pipex->head->length - 1)
 	{
 		dup2(pipex->info.prev_pipes, STDIN_FILENO);
 		close(pipex->info.prev_pipes);
 		writefile(*file + OUT, *pipex);
-		close_pipe(& pipex->info);
-		exec_cmd(lst, & pipex->info);
-		free_pipex(*pipex);
-		exit(pipex -> info.status);
 	}
-	dup2(pipex->info.prev_pipes, STDIN_FILENO);
-	close(pipex->info.prev_pipes);
-	dup2(pipex->info.fd[1], STDOUT_FILENO);
-	close_pipe(& pipex->info);
-	exec_cmd(lst, & pipex->info);
-	free_pipex(*pipex);
-	exit(pipex -> info.status);
+	else
+	{
+		dup2(pipex->info.prev_pipes, STDIN_FILENO);
+		close(pipex->info.prev_pipes);
+		dup2(pipex->info.fd[1], STDOUT_FILENO);
+	}
+	norm(lst, pipex);
 }

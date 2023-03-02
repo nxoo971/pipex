@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 00:15:23 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/31 13:09:53 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:14:07 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* 0 = base | 1 = width | 2 = c*/
 static \
 int	_prec(const struct s_spec_info *s, \
-				uintptr_t n, int base[3], t_bool lower)
+				uintptr_t n, int base[3], bool lower)
 {
 	if (!s->with_leading_zeroes && s->is_left_aligned)
 		return (print_sign(s) + print_prefix(s) + \
@@ -31,7 +31,7 @@ int	_prec(const struct s_spec_info *s, \
 }
 
 int	precision_is_not_specified(const struct s_spec_info *s, \
-									uintptr_t n, int base, t_bool lower)
+									uintptr_t n, int base, bool lower)
 {
 	int	c;
 	int	width;

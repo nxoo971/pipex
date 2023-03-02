@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 01:05:09 by nxoo              #+#    #+#             */
-/*   Updated: 2023/01/03 17:05:30 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:10:03 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	is_specifier(char c)
 	return (names[(unsigned)c] != NULL);
 }
 
-static t_bool	case_string_specification(const char **start, const char **end, \
+static bool	case_string_specification(const char **start, const char **end, \
 											int *len, va_list *params)
 {
 	if (e_state == STRING)

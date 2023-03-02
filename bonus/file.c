@@ -6,17 +6,19 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:39:28 by jewancti          #+#    #+#             */
-/*   Updated: 2023/03/01 00:40:23 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:20:17 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void		readfile(t_file *file, t_pipex pipex)
+void	readfile(t_file *file, t_pipex pipex)
 {
 	file->fd = open(file->filename, O_RDONLY);
 	if (file->fd == -1)
 	{
+		if (errno == 13)
+			ft_printf("bash: %s: Permission denied\n", file->filename);
 		close_pipe(& pipex.info);
 		free_pipex(pipex);
 		print_error_exit(file->filename);
@@ -25,7 +27,7 @@ void		readfile(t_file *file, t_pipex pipex)
 	close(file->fd);
 }
 
-void		writefile(t_file *file, t_pipex pipex)
+void	writefile(t_file *file, t_pipex pipex)
 {
 	if (pipex.info.limiter)
 		file->fd = open(file->filename, O_RDWR | O_APPEND | O_CREAT, 0666);
@@ -33,6 +35,8 @@ void		writefile(t_file *file, t_pipex pipex)
 		file->fd = open(file->filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	if (file->fd == -1)
 	{
+		if (errno == 13)
+			ft_printf("bash: %s: Permission denied\n", file->filename);
 		close_pipe(& pipex.info);
 		free_pipex(pipex);
 		print_error_exit(file->filename);

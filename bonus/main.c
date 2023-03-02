@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:37:05 by jewancti          #+#    #+#             */
-/*   Updated: 2023/03/01 00:07:12 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:19:10 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ int	main(int ac, char **av, char **env)
 	static t_info	info = {0, .prev_pipes = -1};
 	static t_file	file[2] = {0};
 	int				index_pid;
-	int status = 0;
+	int				status;
 
+	status = 0;
 	if (!env || !*env || ac < 5)
 		return (0);
 	info.env = env_paths_to_string(env, & info.env_size);

@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:13:48 by jewancti          #+#    #+#             */
-/*   Updated: 2023/02/28 22:42:11 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:18:37 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	add_elem(t_head **head, t_plist **list, \
 					const char *command, const char **option)
 {
 	t_plist	*tmp;
+
 	if (!*list)
 	{
 		*list = create_elem(command, option, head);

@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 00:40:19 by nxoo              #+#    #+#             */
-/*   Updated: 2022/12/31 13:09:36 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:13:11 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	exec_double(va_list *param, struct s_spec_info *s)
 	int		written;
 
 	n = va_arg(*param, double);
-	written = print_n_base((int)n, 10, faux);
+	written = print_n_base((int)n, 10, false);
 	n -= (int)n;
 	count = 6;
 	if (s->precision >= 0)

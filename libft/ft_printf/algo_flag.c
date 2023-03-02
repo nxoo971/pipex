@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 02:33:37 by nxoo              #+#    #+#             */
-/*   Updated: 2022/12/31 14:42:48 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:11:53 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static \
 int	precision_greater_than_currentsize(\
-	const struct s_spec_info *s, uintptr_t n, int base, t_bool lower)
+	const struct s_spec_info *s, uintptr_t n, int base, bool lower)
 {
 	int	width;
 	int	prec;
@@ -43,7 +43,7 @@ int	precision_greater_than_currentsize(\
 
 static \
 int	width_greater_than_currentsize(\
-const struct s_spec_info *s, uintptr_t n, int bs[4], t_bool lower)
+const struct s_spec_info *s, uintptr_t n, int bs[4], bool lower)
 {
 	if (s->width_is_specified && s->width > s->current_size - (int)s->is_null)
 	{
@@ -73,7 +73,7 @@ const struct s_spec_info *s, uintptr_t n, int bs[4], t_bool lower)
 }
 
 int	print_algo_flag(const struct s_spec_info *s, \
-	uintptr_t n, int base, t_bool lower)
+	uintptr_t n, int base, bool lower)
 {
 	int	width;
 	int	prec;

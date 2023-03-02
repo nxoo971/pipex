@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:58:46 by jewancti          #+#    #+#             */
-/*   Updated: 2023/02/18 08:05:35 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:27:03 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 const char	**set_paths(char **paths, int *size)
 {
 	const char	**res;
-	int		i;
+	int			i;
 
 	res = ft_calloc(sizeof(char *), ft_arraylen(paths) + 1);
 	if (!res)
@@ -26,7 +26,10 @@ const char	**set_paths(char **paths, int *size)
 	{
 		res[i] = ft_strjoin(paths[i], "/");
 		if (!res[i])
-			return (0); // free
+		{
+			ft_arrayndel((char **)res, i);
+			return (0);
+		}
 	}
 	*size = i;
 	return (res);
