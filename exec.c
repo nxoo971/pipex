@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:39:09 by jewancti          #+#    #+#             */
-/*   Updated: 2023/03/02 08:22:14 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:28:56 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,19 @@ void	exec_cmd(t_plist *list, t_info *info)
 	lst = list;
 	path_id = valid_command(lst->command, *info);
 	if (path_id == -1)
-	{
-		if (lst -> command)
-			ft_printf("bash: %s: command not found\n", \
-						lst->command, info -> status = 127);
-		else
-			ft_printf("bash: : command not found\n", info -> status = 127);
-	}
+		info -> status = 127;
 	else
 	{
-		cmd = ft_strjoin(info -> env[path_id], lst->command);
-		if (cmd)
+		if (path_id == -2)
+			execve(lst -> command, (char **)lst->option, (char **)info -> env);
+		else
 		{
-			execve(cmd, (char **)lst->option, (char **)info -> env);
-			ft_memdel((void **)& cmd);
+			cmd = ft_strjoin(info -> env[path_id], lst -> command);
+			if (cmd)
+			{
+				execve(cmd, (char **)lst->option, (char **)info -> env);
+				ft_memdel((void **)& cmd);
+			}
 		}
 	}
 	close_pipe(info);

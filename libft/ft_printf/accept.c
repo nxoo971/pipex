@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 21:06:24 by nxoo              #+#    #+#             */
-/*   Updated: 2023/03/02 08:11:16 by jewancti         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:13:25 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	accept_type_char(struct s_spec_info *s, char c)
 	else if (c == 'l')
 		s->long_count++;
 	else if (c == 'z')
-		s->is_size_t++;
+		s->is_size_t = true;
 	else
 		return (false);
 	return (true);
